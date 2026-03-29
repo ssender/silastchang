@@ -1,5 +1,5 @@
-import Obj from "./obj-base.js";
-import Spritesheet from "./sprsheet.js";
+import Obj from "../base/obj-base.js";
+import Spritesheet from "../base/sprsheet.js";
 
 class ObjCharacter extends Obj {
     moving = false;
@@ -113,8 +113,8 @@ class ObjCharacter extends Obj {
         super.update(_inputs, _room);
     }
 
-    draw(_context) {
-        this.spritesheet.draw(_context, this.x, this.y - 3, (this.facing - 1)*5 + this.aframe);
+    draw(_context, _cam) {
+        this.spritesheet.draw(_context, this.x - _cam.x, this.y - 3 - _cam.y, (this.facing - 1)*5 + this.aframe);
     }
 }
 

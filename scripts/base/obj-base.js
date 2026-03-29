@@ -16,9 +16,9 @@ class Obj {
         // at the end of the step, update the sprite data to match current sprite frame
     }
     
-    draw(_context) {
+    draw(_context, _cam) {
         // draw the sprite
-        this.spritesheet.draw(_context, this.x, this.y, this.frame);
+        this.spritesheet.draw(_context, this.x - _cam.x, this.y - _cam.y, this.frame);
     }
 }
 

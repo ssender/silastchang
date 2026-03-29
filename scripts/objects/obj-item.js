@@ -1,5 +1,5 @@
-import Obj from "./obj-base.js";
-import Spritesheet from "./sprsheet.js";
+import Obj from "../base/obj-base.js";
+import Spritesheet from "../base/sprsheet.js";
 
 class ObjItem extends Obj {
     aframe = 0;
@@ -38,15 +38,15 @@ class ObjItem extends Obj {
         this.has_collision = false;
     }
 
-    draw(_context) {
+    draw(_context, _cam) {
         switch(this.state){
             case 0:
                 break;
             case 1:
-                this.spritesheet.draw(_context, this.x, this.y + this.aframe - 2, 0);
+                this.spritesheet.draw(_context, this.x - _cam.x, this.y - _cam.y + this.aframe - 2, 0);
                 break;
             case 2:
-                if (this.aclock % 2 === 0) {this.spritesheet.draw(_context, this.x, this.y - 5 - Math.floor(this.aclock * 0.2), 0);}
+                if (this.aclock % 2 === 0) {this.spritesheet.draw(_context, this.x - _cam.x, this.y - _cam.y - 5 - Math.floor(this.aclock * 0.2), 0);}
                 break;
         }
         
