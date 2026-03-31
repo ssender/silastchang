@@ -26,8 +26,8 @@ const room = {
     update(_inputs){
         this.objects.forEach((obj) => obj.update(_inputs, this));
         if (this.camera.follow != undefined) {
-            this.camera.x = Math.min(this.room_width - 256, Math.max(0, this.camera.follow.x - 120));
-            this.camera.y = Math.min(this.room_height - 144, Math.max(0, this.camera.follow.y - 88));
+            this.camera.x = Math.max(8, Math.min(this.room_width - 264, this.camera.follow.x - 120));
+            this.camera.y = Math.max(8, Math.min(this.room_height - 152, this.camera.follow.y - 88));
         }
     },
     draw(_ctx){
