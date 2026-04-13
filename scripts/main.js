@@ -82,7 +82,6 @@ function step(timestamp) {
         resetKeys();
         // draw all the things
         room.draw(ctx);
-        PixelText.draw(ctx, "test", 20, 50);
         dt = 0;
     }
     start = timestamp;

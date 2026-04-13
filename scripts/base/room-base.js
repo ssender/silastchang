@@ -1,7 +1,14 @@
 import Spritesheet from "./sprsheet.js";
+import TextCE from "./cutscenes.js";
+
+
 const room = {
     context : undefined,
     camera : {x:0, y:0, follow:undefined},
+    cutscene_active : true,
+    cutscene_stage : 0,
+    cutscene_progress : 0,
+    cutscene : [new TextCE("I forgor :skull:")],
     img_bg : new Image(),
     img_fg : new Image(),
     objects : [],
@@ -12,7 +19,6 @@ const room = {
     initiate() {
         this.room_height = this.tilemap[0].length * 16;
         this.room_width = this.tilemap.length * 16;
-        
     },
     objects_at_tile(tx, ty) {
         var out = [];
@@ -24,10 +30,30 @@ const room = {
         return out;
     },
     update(_inputs){
+        if (this.cutscene_active) {
+            if (this.cutscene_progress < this.cutscene[this.cutscene_stage].length) {
+                this.cutscene_progress += 1;
+                this.cutscene[this.cutscene_stage].update(this.cutscene_progress);
+                
+            } else {
+                if (this.cutscene[this.cutscene_stage].auto || _inputs.ap)
+                {
+                    this.cutscene_progress = 0;
+                    this.cutscene_stage += 1;
+                }
+            }
+            if (this.cutscene_stage >= this.cutscene.length) {
+                this.cutscene_active = false;
+                this.cutscene_stage = 0;
+                this.cutscene_progress = 0;
+            }
+        }
+
         this.objects.forEach((obj) => obj.update(_inputs, this));
+
         if (this.camera.follow != undefined) {
             this.camera.x = Math.max(8, Math.min(this.room_width - 264, this.camera.follow.x - 120));
-            this.camera.y = Math.max(8, Math.min(this.room_height - 152, this.camera.follow.y - 88));
+            this.camera.y = Math.max(8, Math.min(this.room_height - 152, this.camera.follow.y - 64));
         }
     },
     draw(_ctx){
@@ -47,6 +73,10 @@ const room = {
         }
         // objects
         this.objects.forEach((obj) => obj.draw(_ctx, this.camera));
+        // cutscene overlay
+        if (this.cutscene_active) {
+            this.cutscene[this.cutscene_stage].draw(_ctx, this.cutscene_progress);
+        }
         // frame
         _ctx.drawImage(this.img_fg, 0, 0);
     }

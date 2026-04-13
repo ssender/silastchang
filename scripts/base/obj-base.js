@@ -20,6 +20,11 @@ class Obj {
         // draw the sprite
         this.spritesheet.draw(_context, this.x - _cam.x, this.y - _cam.y, this.frame);
     }
+
+    load_cutscene(_cutscene, _room) {
+        _room.cutscene = _cutscene;
+        _room.cutscene_active = true;
+    }
 }
 
 export default Obj;

@@ -1,5 +1,6 @@
 import Obj from "../base/obj-base.js";
 import Spritesheet from "../base/sprsheet.js";
+import TextCE from "../base/cutscenes.js";
 
 class ObjItem extends Obj {
     aframe = 0;
@@ -31,11 +32,15 @@ class ObjItem extends Obj {
         }
     }
 
-    activate(_playerobj){
-        this.aclock = 0;
-        this.aframe = 0;
-        this.state = 2;
-        this.has_collision = false;
+    activate(_room){
+        if (this.state == 1)
+        {
+            this.aclock = 0;
+            this.aframe = 0;
+            this.state = 2;
+            this.has_collision = false;
+            this.load_cutscene([new TextCE("You got pretzel!!1!1!")], _room)
+        }
     }
 
     draw(_context, _cam) {
