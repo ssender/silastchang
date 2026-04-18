@@ -1,5 +1,5 @@
 import Spritesheet from "./sprsheet.js";
-import TextCE from "./cutscenes.js";
+import * as cutscenes from "./cutscenes.js";
 
 
 const room = {
@@ -8,7 +8,7 @@ const room = {
     cutscene_active : true,
     cutscene_stage : 0,
     cutscene_progress : 0,
-    cutscene : [new TextCE("I forgor :skull:")],
+    cutscene : [new cutscenes.TextCE("I forgor :skull:")],
     img_bg : new Image(),
     img_fg : new Image(),
     objects : [],

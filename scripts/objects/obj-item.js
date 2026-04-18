@@ -1,6 +1,6 @@
 import Obj from "../base/obj-base.js";
 import Spritesheet from "../base/sprsheet.js";
-import TextCE from "../base/cutscenes.js";
+import * as cutscenes from "../base/cutscenes.js";
 
 class ObjItem extends Obj {
     aframe = 0;
@@ -10,6 +10,7 @@ class ObjItem extends Obj {
         super(ix, iy);
         this.spritesheet = new Spritesheet("images/pretzel-stick.png", 1, 1);
         this.has_collision = true;
+        this.cutscene = [new cutscenes.TextCE("You got pretzel!!1!1!")];
     }
 
     update(_inputs, _room) {
@@ -39,7 +40,7 @@ class ObjItem extends Obj {
             this.aframe = 0;
             this.state = 2;
             this.has_collision = false;
-            this.load_cutscene([new TextCE("You got pretzel!!1!1!")], _room)
+            this.load_cutscene(this.cutscene, _room)
         }
     }
 

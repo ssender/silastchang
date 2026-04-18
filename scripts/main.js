@@ -59,7 +59,6 @@ document.addEventListener("keyup", getKeyUp);
 // ROOM SETUP ------------------------------
 import room from "./rooms/room-big.js";
 room.initiate();
-import PixelText from "./base/text.js";
 // initialize the canvas stuff
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");

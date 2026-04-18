@@ -38,4 +38,4 @@ class WaitCE extends CutsceneElement {
     }
 }
 
-export default TextCE;
+export {TextCE, WaitCE};
