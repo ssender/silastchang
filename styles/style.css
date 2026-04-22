@@ -26,9 +26,9 @@ canvas {
 
 h1 {
   font-size : 55px;
-  margin-left: 16px;
+  margin-left: 0px;
   margin-bottom: 0px;
-  margin-top: 16px;
+  margin-top: 8px;
   padding: 0px;
   
 }
@@ -47,6 +47,7 @@ h4 {
   margin-left: 0px;
   margin-top: 0px;
   margin-bottom: 0px;
+  padding-left: 8px;
   font-weight: normal;
 }
 
@@ -87,9 +88,16 @@ li{
 
 .article-container {
   border-top: 4px solid #1a2d21;
-  margin-left: 16px;
-  margin-top: 10px;
+  margin: 10px 16px 0px 16px;
   padding-left: 8px;
   padding-top: 0px;
   padding-bottom: 0px;
+}
+
+.title-container {
+  border-bottom: 4px solid #1a2d21;
+  margin: 10px 16px 16px 16px;
+  padding-left: 8px;
+  padding-top: 0px;
+  padding-bottom: 8px;
 }

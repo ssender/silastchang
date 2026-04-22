@@ -5,10 +5,11 @@ import * as cutscenes from "./cutscenes.js";
 const room = {
     context : undefined,
     camera : {x:0, y:0, follow:undefined},
-    cutscene_active : true,
+    cutscene_active : false,
     cutscene_stage : 0,
     cutscene_progress : 0,
     cutscene : [new cutscenes.TextCE("I forgor :skull:")],
+    flags : new Array(64),
     img_bg : new Image(),
     img_fg : new Image(),
     objects : [],
@@ -31,22 +32,25 @@ const room = {
     },
     update(_inputs){
         if (this.cutscene_active) {
-            if (this.cutscene_progress < this.cutscene[this.cutscene_stage].length) {
-                this.cutscene_progress += 1;
-                this.cutscene[this.cutscene_stage].update(this.cutscene_progress);
-                
-            } else {
-                if (this.cutscene[this.cutscene_stage].auto || _inputs.ap)
-                {
+            while ((this.cutscene_progress >= this.cutscene[this.cutscene_stage].length) && (this.cutscene[this.cutscene_stage].auto || _inputs.ap)) {
+                // advance the cutscene if it's done and auto, or done and the button pressed
+                this.cutscene_progress = 0;
+                this.cutscene_stage += 1;
+                if (this.cutscene_stage >= this.cutscene.length) {
+                    // end the cutscene if the end of the list was reached
+                    this.cutscene_active = false;
+                    this.cutscene_stage = 0;
                     this.cutscene_progress = 0;
-                    this.cutscene_stage += 1;
+                    break;
                 }
             }
-            if (this.cutscene_stage >= this.cutscene.length) {
-                this.cutscene_active = false;
-                this.cutscene_stage = 0;
-                this.cutscene_progress = 0;
-            }
+
+            // since cutscene could end, we need to check that it's still active before trying to update it
+            if ((this.cutscene_active) && (this.cutscene_progress < this.cutscene[this.cutscene_stage].length)) {
+                // advance the cutscene by a frame if it is not complete, and run its update statment
+                this.cutscene_progress += 1;
+                this.cutscene[this.cutscene_stage].update(this.cutscene_progress, _inputs);
+            } 
         }
 
         this.objects.forEach((obj) => obj.update(_inputs, this));

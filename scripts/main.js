@@ -1,3 +1,6 @@
+// ROOM SETUP ------------------------------
+const room = document.room;
+room.initiate();
 
 // GENERAL SETUP ------------------------------
 // inputs
@@ -56,17 +59,12 @@ function resetKeys(){
 document.addEventListener("keydown", getKeyDown);
 document.addEventListener("keyup", getKeyUp);
 
-// ROOM SETUP ------------------------------
-import room from "./rooms/room-big.js";
-room.initiate();
-// initialize the canvas stuff
+//  CANVAS SETUP ------------------------------
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 room.context = ctx;
-room.initiate();
 
 // MAIN LOOP ------------------------------
-// When an Animation Frame is Requested, step is called, and is fed the time since the last frame through the argument timestamp
 let start;
 let dt = 0;
 function step(timestamp) {
@@ -77,7 +75,7 @@ function step(timestamp) {
     if (dt >= 0.025) {
         // update the values of the world in game
         room.update(inputs);
-        if (inputs.ap) {console.log(room.room_width, room.room_height, room.camera.x, room.camera.y)}
+        //if (inputs.ap) {console.log(room.room_width, room.room_height, room.camera.x, room.camera.y)}
         resetKeys();
         // draw all the things
         room.draw(ctx);
