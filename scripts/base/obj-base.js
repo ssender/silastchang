@@ -22,8 +22,8 @@ class Obj {
     }
 
     load_cutscene(_cutscene, _room) {
-        _room.cutscene = _cutscene;
-        _room.cutscene_active = true;
+        _room.cutscene_handler.cutscene = _cutscene;
+        _room.cutscene_handler.active = true;
     }
 }
 

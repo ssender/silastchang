@@ -17,7 +17,7 @@ class ObjCharacter extends Obj {
         var _targettilex = this.tilex;
         var _targettiley = this.tiley;
         var _objects_in_target_tile = undefined;
-        if (_room.cutscene_active) {return;}
+        if (_room.cutscene_handler.active) {return;}
         if (this.moveprogress === 0) {
             // do interactions if A button pressed
             if (_inputs.ap) {

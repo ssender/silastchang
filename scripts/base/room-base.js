@@ -1,14 +1,11 @@
 import Spritesheet from "./sprsheet.js";
-import * as cutscenes from "./cutscenes.js";
+import CutsceneProcessor from "./cutscene-processor.js";
 
 
 const room = {
     context : undefined,
     camera : {x:0, y:0, follow:undefined},
-    cutscene_active : false,
-    cutscene_stage : 0,
-    cutscene_progress : 0,
-    cutscene : [new cutscenes.TextCE("I forgor :skull:")],
+    cutscene_handler : new CutsceneProcessor(),
     flags : new Array(64),
     img_bg : new Image(),
     img_fg : new Image(),
@@ -31,28 +28,7 @@ const room = {
         return out;
     },
     update(_inputs){
-        if (this.cutscene_active) {
-            while ((this.cutscene_progress >= this.cutscene[this.cutscene_stage].length) && (this.cutscene[this.cutscene_stage].auto || _inputs.ap)) {
-                // advance the cutscene if it's done and auto, or done and the button pressed
-                this.cutscene_progress = 0;
-                this.cutscene_stage += 1;
-                if (this.cutscene_stage >= this.cutscene.length) {
-                    // end the cutscene if the end of the list was reached
-                    this.cutscene_active = false;
-                    this.cutscene_stage = 0;
-                    this.cutscene_progress = 0;
-                    break;
-                }
-            }
-
-            // since cutscene could end, we need to check that it's still active before trying to update it
-            if ((this.cutscene_active) && (this.cutscene_progress < this.cutscene[this.cutscene_stage].length)) {
-                // advance the cutscene by a frame if it is not complete, and run its update statment
-                this.cutscene_progress += 1;
-                this.cutscene[this.cutscene_stage].update(this.cutscene_progress, _inputs);
-            } 
-        }
-
+        this.cutscene_handler.update(_inputs, this.flags);
         this.objects.forEach((obj) => obj.update(_inputs, this));
 
         if (this.camera.follow != undefined) {
@@ -78,9 +54,7 @@ const room = {
         // objects
         this.objects.forEach((obj) => obj.draw(_ctx, this.camera));
         // cutscene overlay
-        if (this.cutscene_active) {
-            this.cutscene[this.cutscene_stage].draw(_ctx, this.cutscene_progress);
-        }
+        this.cutscene_handler.draw(_ctx);
         // frame
         _ctx.drawImage(this.img_fg, 0, 0);
     }

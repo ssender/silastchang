@@ -10,7 +10,33 @@ class ObjItem extends Obj {
         super(ix, iy);
         this.spritesheet = new Spritesheet("images/pretzel-stick.png", 1, 1);
         this.has_collision = true;
-        this.cutscene = [new cutscenes.TextCE("You got pretzel!!1!1!")];
+        this.cutscene = [new cutscenes.TextCE("You got pretzel!!1!1!E"),
+            new cutscenes.WaitCE(30),
+            new cutscenes.TextCE("Pretzel was added to your", "inventory.")
+        ];
+
+        this.cutscene = [
+            new cutscenes.TextCE("Choose Yes or No"),
+            new cutscenes.ChoiceCE(["Yes", "No"], [2, 4]),
+            new cutscenes.TextCE("You chose Yes."),
+            new cutscenes.JumpCE(5),
+            new cutscenes.TextCE("You chose No"),
+            new cutscenes.TextCE("This is the end of ", "the scene.")
+        ];
+
+        this.cutscene = [
+            new cutscenes.CheckFlagCE(0, true, 3, 1),
+            new cutscenes.TextCE("Do you like pretzel?"),
+            new cutscenes.JumpCE(4),
+            new cutscenes.TextCE("You said you like pretzel.", "Is it still true?"),
+            new cutscenes.ChoiceCE(["Yes", "No"], [5, 8]),
+            new cutscenes.TextCE("You like pretzels."),
+            new cutscenes.SetFlagCE(0, true),
+            new cutscenes.JumpCE(10),
+            new cutscenes.TextCE("You do not like pretzels."),
+            new cutscenes.SetFlagCE(0, false),
+            new cutscenes.TextCE("end")
+        ]
     }
 
     update(_inputs, _room) {
@@ -28,7 +54,7 @@ class ObjItem extends Obj {
                 break;
             case 2: //collect anim
                 this.aclock += 1;
-                if (this.aclock > 30) {this.state = 0;}
+                if (this.aclock > 30) {this.state = 0;} 
                 break;
         }
     }
