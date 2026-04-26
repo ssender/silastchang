@@ -7,9 +7,11 @@ class ObjCharacter extends Obj {
     aframe = 0;
     aclock = 0;
     facing = 3; // 1-up, 2-right, 3-down, 4-left
+    hat = 4;
     constructor(ix=0, iy=0) {
         super(ix, iy);
         this.spritesheet = new Spritesheet("images/mc_spritesheet.png", 4, 5);
+        this.hatssheet = new Spritesheet("images/hats_sheet.png", 4, 4);
     }
 
     update(_inputs, _room) {
@@ -116,6 +118,10 @@ class ObjCharacter extends Obj {
 
     draw(_context, _cam) {
         this.spritesheet.draw(_context, this.x - _cam.x, this.y - 3 - _cam.y, (this.facing - 1)*5 + this.aframe);
+        if (this.hat > 0) {
+            var _f = (this.hat * 4) - 5 + this.facing;
+            this.hatssheet.draw(_context, this.x - _cam.x, this.y - 11 - _cam.y + (this.aframe % 2), _f);
+        }
     }
 }
 
