@@ -7,7 +7,7 @@ class ObjCharacter extends Obj {
     aframe = 0;
     aclock = 0;
     facing = 3; // 1-up, 2-right, 3-down, 4-left
-    hat = 4;
+    hat = 2;
     constructor(ix=0, iy=0) {
         super(ix, iy);
         this.spritesheet = new Spritesheet("images/mc_spritesheet.png", 4, 5);
@@ -38,8 +38,11 @@ class ObjCharacter extends Obj {
                         break;
                 }
                 _objects_in_target_tile = _room.objects_at_tile(_targettilex, _targettiley);
-                if (_objects_in_target_tile.length != 0) {
-                    _objects_in_target_tile[0].activate(_room);
+                for (const _obj of _objects_in_target_tile) {
+                    if (_obj.has_interaction) {
+                        _objects_in_target_tile[0].activate(_room);
+                        break;
+                    }
                 }
                 return;
             }
@@ -54,7 +57,7 @@ class ObjCharacter extends Obj {
                 if (_tilemap[this.tilex - 1][this.tiley] < 32) {
                     _targettilex += -1;
                 }else{
-                    console.log("movement blocked by tile", _tilemap[this.tilex - 1][this.tiley]);
+                    //console.log("movement blocked by tile", _tilemap[this.tilex - 1][this.tiley]);
                 }
             }else if (_inputs.up) {
                 this.facing = 1;

@@ -6,6 +6,7 @@ const room = {
     context : undefined,
     camera : {x:0, y:0, follow:undefined},
     cutscene_handler : new CutsceneProcessor(),
+    globals : {"hat" : 0},
     flags : new Array(64),
     img_bg : new Image(),
     img_fg : new Image(),
@@ -14,9 +15,33 @@ const room = {
     room_width : 1,
     room_height : 1,
     tilemap : [[32,32,32,32,32,32,32,32,32,32],[32,0,0,0,0,0,0,0,0,32],[32,0,0,0,0,0,0,0,0,32],[32,0,0,0,0,0,0,0,0,32],[32,0,0,0,0,0,0,0,0,32],[32,0,0,0,0,0,0,0,0,32],[32,0,0,0,0,0,0,0,0,32],[32,0,0,0,0,0,0,0,0,32],[32,0,0,0,0,0,0,0,0,32],[32,0,0,0,0,0,0,0,0,32],[32,0,0,0,0,0,0,0,0,32],[32,0,0,0,0,0,0,0,0,32],[32,0,0,0,0,0,0,0,0,32],[32,0,0,0,0,0,0,0,0,32],[32,0,0,0,0,0,0,0,0,32],[32,0,0,0,0,0,0,0,0,32],[32,32,32,32,32,32,32,32,32,32]],
+    load_storage() {
+        if (localStorage.length == 0) {
+            for (const _field in this.globals) {
+                localStorage.setItem(_field, this.globals[_field]);
+            }
+        } else {
+            for (const _field in this.globals) {
+                this.globals[_field] = localStorage.getItem(_field);
+            }
+        }
+        this.camera.follow.hat = this.globals.hat;
+    },
+    save_storage() {
+        for (const _field in this.globals) {
+            localStorage.setItem(_field, this.globals[_field]);
+        }
+        this.camera.follow.hat = this.globals.hat;
+    },
+    reset_storage() {
+        localStorage.clear();
+        this.load_storage();
+    },
     initiate() {
         this.room_height = this.tilemap[0].length * 16;
         this.room_width = this.tilemap.length * 16;
+        this.cutscene_handler.room = this;
+        this.load_storage();
     },
     objects_at_tile(tx, ty) {
         var out = [];

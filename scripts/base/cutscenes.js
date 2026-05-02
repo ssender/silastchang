@@ -73,4 +73,36 @@ class SetFlagCE extends CutsceneElement {
     }
 }
 
-export {TextCE, WaitCE, ChoiceCE, CheckFlagCE, SetFlagCE, JumpCE};
+class CheckGlobalCE extends CutsceneElement {
+    constructor(_flag, _comparison=true, _ifyes, _ifno) {
+        super();
+        this.type = "CheckGlobal";
+        this.flag = _flag;
+        this.comparison = _comparison;
+        this.ifyes = _ifyes;
+        this.ifno = _ifno;
+        this.length = 0;
+        this.auto = true;
+    }
+}
+
+class SetGlobalCE extends CutsceneElement {
+    constructor(_flag, _val) {
+        super();
+        this.type = "SetGlobal";
+        this.flag = _flag;
+        this.value = _val;
+        this.length = 0;
+        this.auto = true;
+    }
+}
+
+class SaveCE extends CutsceneElement {
+    constructor() {
+        super();
+        this.type = "Save";
+        this.auto = true;
+    }
+}
+
+export {TextCE, WaitCE, ChoiceCE, CheckFlagCE, SetFlagCE, JumpCE, SaveCE, SetGlobalCE, CheckGlobalCE};

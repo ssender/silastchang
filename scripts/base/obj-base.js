@@ -5,6 +5,7 @@ class Obj {
     spritesheet = undefined;
     frame = 0;
     has_collision = false;
+    has_interaction = false;
     constructor(ix=0, iy=0) {
         this.x = ix;
         this.y = iy;
@@ -24,6 +25,7 @@ class Obj {
     load_cutscene(_cutscene, _room) {
         _room.cutscene_handler.cutscene = _cutscene;
         _room.cutscene_handler.active = true;
+        console.log(_room.cutscene_handler);
     }
 }
 

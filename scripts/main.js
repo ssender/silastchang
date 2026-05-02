@@ -75,7 +75,7 @@ function step(timestamp) {
     if (dt >= 0.025) {
         // update the values of the world in game
         if (inputs.ap) {
-            console.log(String(room.flags[0]));
+            console.log(String(room.globals["hat"]));
         }
         room.update(inputs);
         

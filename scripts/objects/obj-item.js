@@ -1,28 +1,14 @@
-import Obj from "../base/obj-base.js";
+import ObjInteract from "../base/obj-interact-base.js";
 import Spritesheet from "../base/sprsheet.js";
 import * as cutscenes from "../base/cutscenes.js";
 
-class ObjItem extends Obj {
+class ObjItem extends ObjInteract {
     aframe = 0;
     aclock = 0;
     state = 1; // 0-disabled, 1-idle, 2-activated
     constructor(ix=0, iy=0) {
         super(ix, iy);
         this.spritesheet = new Spritesheet("images/pretzel-stick.png", 1, 1);
-        this.has_collision = true;
-        this.cutscene = [new cutscenes.TextCE("You got pretzel!!1!1!E"),
-            new cutscenes.WaitCE(30),
-            new cutscenes.TextCE("Pretzel was added to your", "inventory.")
-        ];
-
-        this.cutscene = [
-            new cutscenes.TextCE("Choose Yes or No"),
-            new cutscenes.ChoiceCE(["Yes", "No"], [2, 4]),
-            new cutscenes.TextCE("You chose Yes."),
-            new cutscenes.JumpCE(5),
-            new cutscenes.TextCE("You chose No"),
-            new cutscenes.TextCE("This is the end of ", "the scene.")
-        ];
 
         this.cutscene = [
             new cutscenes.CheckFlagCE(0, true, 3, 1),
@@ -34,8 +20,7 @@ class ObjItem extends Obj {
             new cutscenes.SetFlagCE(0, true),
             new cutscenes.JumpCE(10),
             new cutscenes.TextCE("You do not like pretzels."),
-            new cutscenes.SetFlagCE(0, false),
-            new cutscenes.TextCE("end")
+            new cutscenes.SetFlagCE(0, false)
         ]
     }
 

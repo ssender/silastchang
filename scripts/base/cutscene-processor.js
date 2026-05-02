@@ -9,6 +9,7 @@ class CutsceneProcessor  {
     anim_clock = 0;
     cursorpos = 0;
     textframe = new Spritesheet("images/textframe.png", 1, 1);
+    room = undefined;
     update(_inputs, _flags){
         if (this.active) {
             var _current_event = this.cutscene[this.stage];
@@ -35,6 +36,14 @@ class CutsceneProcessor  {
                     _flags[_current_event.flag] = _current_event.value;
                     break;
 
+                    case "SetGlobal":
+                    this.room.globals[_current_event.flag] = _current_event.value;
+                    break;
+
+                    case "Save":
+                    this.room.save_storage();
+                    break;
+
                     default:
 
                     break;
@@ -55,6 +64,14 @@ class CutsceneProcessor  {
 
                             case "CheckFlag":
                             if (_flags[_current_event.flag] == _current_event.comparison) {
+                                this.stage = _current_event.ifyes;
+                            } else {
+                                this.stage = _current_event.ifno;
+                            }
+                            break;
+
+                            case "CheckGlobal":
+                            if (this.room.globals[_current_event.flag] == _current_event.comparison) {
                                 this.stage = _current_event.ifyes;
                             } else {
                                 this.stage = _current_event.ifno;
