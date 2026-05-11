@@ -30,15 +30,15 @@ class ObjItemHat extends ObjInteract {
                 this.cutscene[7] = new cutscenes.TextCE("Will you wear the COMICALLY", "LARGE BUCKET HAT?");
                 break;
             case 3:
-                this.cutscene[2] = new cutscenes.TextCE("Will you take off the ", "PARTY HAT?");
+                this.cutscene[2] = new cutscenes.TextCE("Will you take off the PARTY ", "HAT?");
                 this.cutscene[7] = new cutscenes.TextCE("Will you wear the PARTY", "HAT?");
                 break;
             case 4:
-                this.cutscene[2] = new cutscenes.TextCE("Will you take off the ", "COOL CAP?");
+                this.cutscene[2] = new cutscenes.TextCE("Will you take off the COOL ", "CAP?");
                 this.cutscene[7] = new cutscenes.TextCE("Will you wear the COOL CAP?", "");
                 break;
             case 2:
-                this.cutscene[2] = new cutscenes.TextCE("Will you take off the ", "CAT EARS?");
+                this.cutscene[2] = new cutscenes.TextCE("Will you take off the CAT ", "EARS?");
                 this.cutscene[7] = new cutscenes.TextCE("Will you wear the CAT EARS?", "");
                 break;
         }

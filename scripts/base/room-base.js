@@ -3,6 +3,7 @@ import CutsceneProcessor from "./cutscene-processor.js";
 
 
 const room = {
+    loaded : false,
     context : undefined,
     camera : {x:0, y:0, follow:undefined},
     cutscene_handler : new CutsceneProcessor(),

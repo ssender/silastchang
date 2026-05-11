@@ -1,0 +1,14 @@
+import room from "../base/room-base.js";
+import ObjCharacter from "../objects/obj-character.js";
+import ObjStaticSprite from "../objects/obj-staticsprite.js";
+import Spritesheet from "../base/sprsheet.js";
+
+room.tilemap = [[32,32,32,32,32,32,32,32,32,32],[32,48,56,48,56,48,56,48,56,32],[32,56,48,56,0,8,0,16,48,32],[32,48,56,0,0,0,8,8,16,32],[32,56,17,0,48,56,0,16,9,32],[32,48,56,0,0,0,17,0,16,32],[32,56,9,0,8,0,0,8,0,32],[32,48,56,0,0,18,0,8,0,32],[32,56,43,46,46,46,45,0,8,32],[32,0,47,18,18,0,40,0,0,32],[32,56,47,32,32,0,0,8,0,32],[32,0,47,32,32,0,8,0,17,32],[32,56,47,32,32,0,16,0,16,32],[32,0,47,32,32,16,41,16,16,32],[32,56,42,46,46,46,44,16,0,32],[32,48,56,48,56,48,56,0,16,32],[32,32,32,32,32,32,32,32,32,32]];
+room.objects.push(new ObjStaticSprite(160, 16, new Spritesheet("images/house.png", 1, 1), 0));
+room.objects.push(new ObjCharacter(176, 80));
+room.img_bg.src = "images/header-smaller.png";
+room.img_fg.src = "images/frame.png";
+room.img_ts.src = "images/ts1.png";
+room.camera.follow = room.objects[1];
+
+export default room;

@@ -85,6 +85,7 @@ class CutsceneProcessor  {
                         if (this.stage >= this.cutscene.length) {
                             this.active = 0;
                             this.stage = 0;
+                            this.cursorpos = 0;
                             _handling_done = true;
                         } else {
                             _current_event = this.cutscene[this.stage];
