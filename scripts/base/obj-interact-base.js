@@ -8,7 +8,7 @@ class ObjInteract extends Obj {
     state = 1; // 0-disabled, 1-idle, 2-activated
     constructor(ix=0, iy=0) {
         super(ix, iy);
-        this.spritesheet = new Spritesheet("images/pretzel-stick.png", 1, 1);
+        this.spritesheet = undefined;
         this.has_collision = true;
         this.has_interaction = true;
         this.cutscene = [];
@@ -26,7 +26,8 @@ class ObjInteract extends Obj {
     }
 
     draw(_context, _cam) {
-        if (state != 0) {
+        if (this.state != 0) {
+            if (this.spritesheet == undefined) {return;}
             this.spritesheet.draw(_context, this.x - _cam.x, this.y - _cam.y - 2, 0);
         }
         

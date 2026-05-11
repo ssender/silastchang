@@ -59,7 +59,7 @@ const room = {
 
         if (this.camera.follow != undefined) {
             this.camera.x = Math.max(8, Math.min(this.room_width - 264, this.camera.follow.x - 120));
-            this.camera.y = Math.max(8, Math.min(this.room_height - 152, this.camera.follow.y - 64));
+            this.camera.y = Math.max(8, Math.min(this.room_height - 152, this.camera.follow.y - 72));
         }
     },
     draw(_ctx){
