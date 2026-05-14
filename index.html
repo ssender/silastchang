@@ -3,47 +3,55 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link href="styles/style.css" rel="stylesheet" />
+    <link href="styles/style_home.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <script type="module">
-      import room from "./scripts/rooms/room-home.js"
-      document.room = room;
-    </script>
-    <script  src="scripts/main.js" type="module"></script>
     <title>web site</title>
   </head>
   <body>
-    <h1>
-        <a href="index.html" class="no-underline">
-      <img src="images/tree.png" height="64px" width="32px" display="inline">
-      Forest
-      </a>
-    </h1>
-  
-    <canvas width="256px" height="144px">
-      a window into a world
-    </canvas>
+    <header> <span><a href="index.html" class="no-underline">Silas Chang</a></span></header> 
 
-    <h1>Home Page</h1>
+    <div class="wrapper">
+      <div class="col1">
+        <div>
+          <h1>Hi!</h1>
 
-    <div class="article-container">
-       <a href="why.html"><h2>Why Does This Website Exist?</h2></a>
-      <h4>April 26, 2026 | <em>statement of purpose</em></h4>
+          <h3>I'm Silas, a climber, coach, student, and tutor based in Orange County, California.</h3>
+
+          <h3>When I'm not studying or training, I offer private climbing instruction and math tutoring.</h3>
+
+          <h3>In the rare situations where I have free time, I like to make music and make games.</h3>
+        </div>
+        
+      </div>
+      <div class="col2">
+        <div>
+          <img src="images/portrait.jpg" class="portrait"/>
+          <h4>(this is what I look like.)</h4>
+        </div>
+      </div>
     </div>
 
-    <div class="article-container">
-       <a href="toomanyhats.html"><h2>Too Many Hats</h2></a>
-      <h4>April 23, 2026 | <em>not enough heads</em></h4>
-    </div>
+    <div class="mainbody">
+      <p>If you are interested in exchanging currency for goods and services, please refer to the following:</p>
 
-    <div class="article-container">
-       <a href="pretzels.html"><h2>Pretzels</h2></a>
-      <h4>April 18, 2026 | <em>a good snack</em></h4>
+      <h2>PROFESSIONAL STUFF</h2>
+
+      <ul>
+        <li><a href="instruction.html">Climbing Instruction</a></li>
+        <li>Math Tutoring</li>
+        <li>Resume</li>
+      </ul>
+
+      <p>If you want to see the random stuff I have decided to put on the internet, here it is:</p>
+
+      <h2>FUN STUFF</h2>
+      <ul>
+        <li><a href="trees/forest.html">Forest</a></li>
+        <li>Coaching Tools</li>
+      </ul>
     </div>
     
-    <div class="article-container">
-    </div>
   </body>
 </html>

@@ -1,0 +1,174 @@
+html {
+  /* px means "pixels". The base font size is now 10 pixels high */
+  font-size: 10px;
+  /* Replace PLACEHOLDER with the font-family property value you got from Google Fonts */
+  font-family: "Noto Serif", serif;
+  background-color: rgb(224, 224, 224);
+}
+
+
+body{
+  background-color: rgb(224, 224, 224);
+  width: 100%;
+  color: #161616;
+  margin: 0px 0px;
+  padding: 0px 0px;
+}
+
+header{
+  font-size: 36px;
+  border-bottom: 2px solid;
+  margin: 10px 10px 10px 10px;
+}
+
+canvas {
+  image-rendering: pixelated;
+  width: 768px;
+  height: 432px;
+}
+
+h1 {
+  font-size : 36px;
+  margin-left: 10px;
+  margin-bottom: 0px;
+  margin-top: 8px;
+  padding: 0px;
+  font-weight: 500;
+}
+
+h2 {
+  font-size : 24px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  margin-top: 0px;
+  padding: 0px;
+  
+}
+
+h3 {
+  font-size : 18px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  margin-top: 0px;
+  margin-right: 10px;
+  padding: 0px;
+  font-weight: normal;
+}
+
+h4 {
+  font-size : 14px;
+  color : #555555;
+  margin-left: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-left: 8px;
+  font-weight: normal;
+  align-items: center;
+}
+
+p{
+  font-size : 14px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  margin-top: 0px;
+  margin-right: 10px;
+  padding: 0px;
+  font-weight: normal;
+}
+
+li{
+  font-size : 14px;
+  margin: 10px;
+}
+
+.header{
+  height: 83px;
+  background-image: url("../images/coach.jpg");
+  color: white;
+  background-size: 800px 533px;
+  width: 770px;
+  padding-left: 30px;
+  padding-top: 450px;
+  display: flex;
+  
+}
+
+.coachheading{
+  background-image: url("../images/coach.jpg");
+  color: white;
+  background-size: 100%;
+  width: 100%;
+  padding-left: 16px;
+  padding-top: 50%;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.title{
+  font-size: 30px;
+  text-shadow: 2px 2px #161616;
+}
+
+.no-underline {
+  text-decoration: none;
+  color: #161616;
+  border-color:#161616;
+  font-size: 36px;
+}
+
+.portrait {
+  width: 200px;
+}
+
+.col1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.col2 {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  padding : 10px;
+}
+
+.wrapper {
+  margin-bottom : 30px;
+}
+
+.mainbody{
+  margin : 15px;
+}
+
+@media screen and (width >= 600px) {
+  .wrapper {
+    display: flex;
+  }
+
+  .col1 {
+    flex: 3;
+    margin-right: 5%;
+  }
+
+  .col2 {
+    flex: 2;
+  }
+
+  p  {
+    font-size: 18px;
+  }
+
+  li {
+    font-size: 18px;
+  }
+
+  .coachheading {
+    background-image: url("../images/coach_long.jpg");
+    padding-top: 30%;
+  }
+
+  .title {
+    font-size: 60px;
+  }
+}
+
