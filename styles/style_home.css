@@ -81,18 +81,6 @@ li{
   margin: 10px;
 }
 
-.header{
-  height: 83px;
-  background-image: url("../images/coach.jpg");
-  color: white;
-  background-size: 800px 533px;
-  width: 770px;
-  padding-left: 30px;
-  padding-top: 450px;
-  display: flex;
-  
-}
-
 .coachheading{
   background-image: url("../images/coach.jpg");
   color: white;
@@ -140,6 +128,27 @@ li{
   margin : 15px;
 }
 
+.booking-sidebar{
+  justify-content: center;
+}
+
+.ext-link {
+  border : 2px solid black;
+  padding : 4px;
+}
+
+.links-box {
+  margin-top: 16px;
+  border : 2px solid black;
+  padding : 4px;
+  margin-right : 16px;
+  margin-left : 16px;
+}
+
+.footer {
+  border-top : 2px solid black; 
+}
+
 @media screen and (width >= 600px) {
   .wrapper {
     display: flex;
@@ -164,11 +173,19 @@ li{
 
   .coachheading {
     background-image: url("../images/coach_long.jpg");
-    padding-top: 30%;
+    padding-top: 25%;
   }
 
   .title {
-    font-size: 60px;
+    font-size: 54px;
+  }
+
+  .mainbody {
+    flex : 4;
+  }
+
+  .booking-sidebar {
+    flex : 2;
   }
 }
 
