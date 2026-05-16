@@ -3,12 +3,12 @@ html {
   font-size: 10px;
   /* Replace PLACEHOLDER with the font-family property value you got from Google Fonts */
   font-family: "Noto Serif", serif;
-  background-color: rgb(224, 224, 224);
+  background-color: rgb(216, 216, 216);
 }
 
 
 body{
-  background-color: rgb(224, 224, 224);
+  background-color: rgb(216, 216, 216);
   width: 100%;
   color: #161616;
   margin: 0px 0px;
@@ -112,6 +112,7 @@ li{
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 12px;
 }
 .col2 {
   align-items: center;
