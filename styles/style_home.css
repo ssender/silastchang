@@ -31,7 +31,7 @@ h1 {
   font-size : 36px;
   margin-left: 10px;
   margin-bottom: 0px;
-  margin-top: 8px;
+  margin-top: 10px;
   padding: 0px;
   font-weight: 500;
 }
@@ -40,7 +40,7 @@ h2 {
   font-size : 24px;
   margin-left: 10px;
   margin-bottom: 10px;
-  margin-top: 0px;
+  margin-top: 10px;
   padding: 0px;
   
 }
@@ -49,7 +49,7 @@ h3 {
   font-size : 18px;
   margin-left: 10px;
   margin-bottom: 10px;
-  margin-top: 0px;
+  margin-top: 10px;
   margin-right: 10px;
   padding: 0px;
   font-weight: normal;
@@ -81,6 +81,15 @@ li{
   margin: 10px;
 }
 
+table {
+  font-size : 14px;
+  margin-left: 8px;
+}
+
+td {
+  padding : 10px
+}
+
 .coachheading{
   background-image: url("../images/coach.jpg");
   color: white;
@@ -95,6 +104,11 @@ li{
 .title{
   font-size: 30px;
   text-shadow: 2px 2px #161616;
+}
+
+.tutor-title{
+  font-size: 30px;
+  margin-left: 16px;
 }
 
 .no-underline {
@@ -146,6 +160,16 @@ li{
   margin-left : 16px;
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.resume-container {
+  width: min(768px, 90%);
+  margin-bottom: 40px;
+}
+
 .footer {
   border-top : 2px solid black; 
 }
@@ -177,7 +201,7 @@ li{
     padding-top: 25%;
   }
 
-  .title {
+  .title, .tutor-title {
     font-size: 54px;
   }
 
@@ -187,6 +211,10 @@ li{
 
   .booking-sidebar {
     flex : 2;
+  }
+
+  table {
+    font-size : 18px
   }
 }
 
