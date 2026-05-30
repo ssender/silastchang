@@ -1,0 +1,42 @@
+html {
+    background-color: #000000;
+}
+
+header {
+    font-size: 48px;
+    color: #aaaaaa;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+}
+
+.timer-cell {
+    border: 2px solid #6a6a6a;
+}
+
+.timer-name {
+    font-size: 24px;
+    color: #aaaaaa;
+}
+
+.timer {
+    font-size: 48px;
+    display: flex;
+    justify-content: center;
+    color: #aaaaaa;
+}
+
+.styled {
+    border: 0;
+    background-color: #000000;
+}
+
+.styled:hover {
+    background-color: #333333;
+}
+
+.styled:active {
+    background-color: #999999;
+}
