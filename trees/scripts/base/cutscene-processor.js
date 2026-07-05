@@ -29,7 +29,7 @@ class CutsceneProcessor  {
 
                     case "Choice":
                     if (_inputs.rightp) {this.cursorpos = Math.min(this.cursorpos + 1, _current_event.choices.length - 1)}
-                    if (_inputs.leftp) {this.cursorpos = Math.min(this.cursorpos - 1, 0)}
+                    if (_inputs.leftp) {this.cursorpos = Math.max(this.cursorpos - 1, 0)}
                     break;
 
                     case "SetFlag":
@@ -109,21 +109,32 @@ class CutsceneProcessor  {
     draw(_ctx) {
         if (this.active) {
             var _current_event = this.cutscene[this.stage];
+            var _drawh = 88;
             switch(_current_event.type)
             {
                 case "Text":
-                this.textframe.draw(_ctx, 8, 88, 0);
+                if (this.room.camera.follow.y - this.room.camera.y > 80) {
+                    _drawh = 12;
+                }
+                this.textframe.draw(_ctx, 8, _drawh, 0);
                 var _tl1 = _current_event.text.length;
-                PixelText.draw(_ctx, _current_event.text.slice(0, Math.min(this.progress, _tl1)), 21, 98);
+                PixelText.draw(_ctx, _current_event.text.slice(0, Math.min(this.progress, _tl1)), 21, _drawh + 10);
                 if (this.progress < _tl1) {break;}
-                PixelText.draw(_ctx, _current_event.text2.slice(0, Math.min(this.progress - _tl1, _current_event.length - _tl1)), 21, 112);
+                PixelText.draw(_ctx, _current_event.text2.slice(0, Math.min(this.progress - _tl1, _current_event.length - _tl1)), 21, _drawh + 24);
                 break;
 
                 case "Choice":
-                this.textframe.draw(_ctx, 8, 88, 0);
-                PixelText.draw(_ctx, _current_event.choices[0], 37, 98);
-                PixelText.draw(_ctx, _current_event.choices[1], 100, 98);
-                PixelText.draw(_ctx, ">", 21 + this.cursorpos*63, 98);
+                if (this.room.camera.follow.y - this.room.camera.y > 80) {
+                    _drawh = 12;
+                }
+                this.textframe.draw(_ctx, 8, _drawh, 0);
+                PixelText.draw(_ctx, _current_event.choices[0], 37, _drawh+10);
+                PixelText.draw(_ctx, _current_event.choices[1], 100, _drawh+10);
+                PixelText.draw(_ctx, ">", 21 + this.cursorpos*63, _drawh+10);
+                break;
+
+                case "Sprite":
+                _current_event.sprite.draw(_ctx, _current_event.ix, _current_event.iy, _current_event.f)
                 break;
 
                 default:

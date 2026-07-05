@@ -4,7 +4,7 @@ import Spritesheet from "../base/sprsheet.js";
 class ObjStaticSprite extends Obj {
     constructor(ix, iy, _spritesheet, _frame) {
         super(ix, iy);
-        this.spritesheet = new Spritesheet("images/house.png", 1, 1);//_spritesheet;
+        this.spritesheet = _spritesheet;
         this.frame = _frame;
     }
 

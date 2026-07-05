@@ -105,4 +105,17 @@ class SaveCE extends CutsceneElement {
     }
 }
 
-export {TextCE, WaitCE, ChoiceCE, CheckFlagCE, SetFlagCE, JumpCE, SaveCE, SetGlobalCE, CheckGlobalCE};
+class SpriteCE extends CutsceneElement {
+    constructor(_sprite, _x, _y, _f) {
+        super();
+        this.type = "Sprite";
+        this.auto = false;
+        this.length = 0;
+        this.ix = _x;
+        this.iy = _y;
+        this.sprite = _sprite;
+        this.f = _f;
+    }
+}
+
+export {TextCE, WaitCE, ChoiceCE, CheckFlagCE, SetFlagCE, JumpCE, SaveCE, SetGlobalCE, CheckGlobalCE, SpriteCE};
