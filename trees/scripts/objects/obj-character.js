@@ -12,6 +12,7 @@ class ObjCharacter extends Obj {
         super(ix, iy);
         this.spritesheet = new Spritesheet("images/mc_spritesheet.png", 4, 5);
         this.hatssheet = new Spritesheet("images/hats_sheet.png", 4, 4);
+        this.id = "Character";
     }
 
     update(_inputs, _room) {

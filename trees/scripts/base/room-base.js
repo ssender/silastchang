@@ -83,6 +83,14 @@ const room = {
         this.cutscene_handler.draw(_ctx);
         // frame
         _ctx.drawImage(this.img_fg, 0, 0);
+    },
+    get_object(id="") {
+        for (const _obj of this.objects) {
+            if (_obj.id === id) {
+                return _obj;
+            }
+        }
+        return undefined;
     }
 };
 

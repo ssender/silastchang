@@ -1,10 +1,21 @@
 html {
     background-color: #000000;
+    font-family: "Noto Serif", sans-serif;
 }
 
 header {
+    position: sticky;
+    padding-bottom:10px;
+}
+
+h1 {
     font-size: 48px;
     color: #aaaaaa;
+}
+
+.control-bar {
+    padding-bottom: 10px;
+    display: flex;
 }
 
 .centered {
@@ -12,8 +23,17 @@ header {
     justify-content: center;
 }
 
+.middled {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .timer-cell {
     border: 2px solid #6a6a6a;
+    width: min(200px, 90%);
+    margin: 2px;
+    height: 140x;
 }
 
 .timer-name {
@@ -24,6 +44,17 @@ header {
 .timer {
     font-size: 48px;
     display: flex;
+    justify-content: center;
+    color: #aaaaaa;
+}
+
+.timers-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.control {
+    font-size: 15px;
     justify-content: center;
     color: #aaaaaa;
 }
@@ -39,4 +70,22 @@ header {
 
 .styled:active {
     background-color: #999999;
+}
+
+.selected {
+    border: 2px solid #6f86b1;
+}
+
+.yellow-text {
+    color: #f1c531;
+}
+
+.red-text {
+    color: #d82b2b;
+}
+
+.plus-button {
+    border: 0;
+    padding: 0px;
+    margin:0px;
 }
