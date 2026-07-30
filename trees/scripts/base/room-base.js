@@ -1,7 +1,6 @@
 import Spritesheet from "./sprsheet.js";
 import CutsceneProcessor from "./cutscene-processor.js";
 
-
 const room = {
     loaded : false,
     context : undefined,
