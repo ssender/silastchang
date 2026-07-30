@@ -10,8 +10,8 @@ class ObjCharacter extends Obj {
     hat = 2;
     constructor(ix=0, iy=0) {
         super(ix, iy);
-        this.spritesheet = new Spritesheet("images/mc_spritesheet.png", 4, 5);
-        this.hatssheet = new Spritesheet("images/hats_sheet.png", 4, 4);
+        this.spritesheet = new Spritesheet("images/char/mc_spritesheet.png", 4, 5);
+        this.hatssheet = new Spritesheet("images/char/hats_sheet.png", 4, 4);
         this.id = "Character";
     }
 
@@ -88,26 +88,30 @@ class ObjCharacter extends Obj {
         }
         
         if (this.moveprogress > 0) {
+            var _ds = 1;
+            if (_inputs.b && _room.globals["runshoes"] == 1 && this.moveprogress % 2 == 1) {
+                var _ds = 2;
+            }
             switch (this.facing) {
                 case 1:
-                    this.y += -1;
+                    this.y += -_ds;
                     break;
                 case 2:
-                    this.x += 1;
+                    this.x += _ds;
                     break;
                 case 3:
-                    this.y += 1;
+                    this.y += _ds;
                     break;
                 case 4:
-                    this.x += -1;
+                    this.x += -_ds;
                     break;
             }
-            this.moveprogress += 1;
+            this.moveprogress += _ds;
             if (this.moveprogress > 16) {
                 this.moveprogress = 0;
             }
-            this.aclock += 1;
-            if (this.aclock >= 6) {
+            this.aclock += _ds;
+            if (this.aclock >= 8) {
                 this.aframe += 1;
                 this.aclock = 0;
                 if (this.aframe >= 5) {this.aframe = 1;}
@@ -115,6 +119,34 @@ class ObjCharacter extends Obj {
         } else {
             this.aframe = 0;
             this.aclock = 0;
+            if (this.tilex == 0) {
+                for (const _w of _room.warps.west) {
+                    if (this.tiley >= _w.lower && this.tiley <= _w.upper) {
+                        _room.room_goto(_w.url, _w.sx, _w.sy);
+                    }
+                }
+            }
+            if (this.tilex == _room.tilemap_width - 1) {
+                for (const _w of _room.warps.east) {
+                    if (this.tiley >= _w.lower && this.tiley <= _w.upper) {
+                        _room.room_goto(_w.url, _w.sx, _w.sy);
+                    }
+                }
+            }
+            if (this.tiley == 0) {
+                for (const _w of _room.warps.north) {
+                    if (this.tilex >= _w.lower && this.tilex <= _w.upper) {
+                        _room.room_goto(_w.url, _w.sx, _w.sy);
+                    }
+                }
+            }
+            if (this.tiley == _room.tilemap_height - 1) {
+                for (const _w of _room.warps.south) {
+                    if (this.tilex >= _w.lower && this.tilex <= _w.upper) {
+                        _room.room_goto(_w.url, _w.sx, _w.sy);
+                    }
+                }
+            }
         }
         this.frame = (this.facing - 1)*5 + this.aframe;
         super.update(_inputs, _room);

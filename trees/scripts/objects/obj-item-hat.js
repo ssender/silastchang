@@ -8,7 +8,7 @@ class ObjItemHat extends ObjInteract {
     state = 1; // 0-disabled, 1-idle, 2-activated
     constructor(ix=0, iy=0, _hatindex=1) {
         super(ix, iy);
-        this.spritesheet = new Spritesheet("images/hatsstrip.png", 1, 4);
+        this.spritesheet = new Spritesheet("images/item/hatsstrip.png", 1, 4);
         this.hatindex = _hatindex
         this.cutscene = [
             new cutscenes.CheckGlobalCE("hat", _hatindex, 1, 7), // 0

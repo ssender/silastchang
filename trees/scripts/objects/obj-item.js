@@ -8,19 +8,15 @@ class ObjItem extends ObjInteract {
     state = 1; // 0-disabled, 1-idle, 2-activated
     constructor(ix=0, iy=0) {
         super(ix, iy);
-        this.spritesheet = new Spritesheet("images/pretzel-stick.png", 1, 1);
+        this.spritesheet = new Spritesheet("images/item/pretzel-stick.png", 1, 1);
 
         this.cutscene = [
-            new cutscenes.CheckFlagCE(0, true, 3, 1),
-            new cutscenes.TextCE("Do you like pretzel?"),
-            new cutscenes.JumpCE(4),
-            new cutscenes.TextCE("You said you like pretzel.", "Is it still true?"),
-            new cutscenes.ChoiceCE(["Yes", "No"], [5, 8]),
-            new cutscenes.TextCE("You like pretzels."),
-            new cutscenes.SetFlagCE(0, true),
-            new cutscenes.JumpCE(10),
-            new cutscenes.TextCE("You do not like pretzels."),
-            new cutscenes.SetFlagCE(0, false)
+            new cutscenes.TextCE("It's a pretzel.", "Pick it up?"),
+            new cutscenes.ChoiceCE(["Yes", "No"], [2, 100]),
+            new cutscenes.SetGlobalCE("haspretzel", 1),
+            new cutscenes.SetFlagCE(0, 1),
+            new cutscenes.TextCE("You got the PRETZEL."),
+            new cutscenes.TextCE("Seems like it tastes", "better than key.")
         ]
     }
 
@@ -36,7 +32,19 @@ class ObjItem extends ObjInteract {
                 else if (this.aclock < 30) {this.aframe = 1;}
                 else if (this.aclock < 45) {this.aframe = 0;}
                 else {this.aframe = -1;}
+                if (_room.globals["haspretzel"] == 1) {
+                    if (_room.flags[0] == 1) {
+                        this.state = 2;
+                        this.aframe = 0;
+                        this.aclock = 0;
+                        this.has_collision = false;
+                    } else {
+                        this.state = 0;
+                        this.has_collision = false;
+                    }
+                } 
                 break;
+                
             case 2: //collect anim
                 this.aclock += 1;
                 if (this.aclock > 30) {this.state = 0;} 
@@ -47,10 +55,6 @@ class ObjItem extends ObjInteract {
     activate(_room){
         if (this.state == 1)
         {
-            this.aclock = 0;
-            this.aframe = 0;
-            this.state = 2;
-            this.has_collision = false;
             this.load_cutscene(this.cutscene, _room)
         }
     }

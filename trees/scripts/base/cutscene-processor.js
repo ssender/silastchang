@@ -8,7 +8,10 @@ class CutsceneProcessor  {
     cutscene = 0;
     anim_clock = 0;
     cursorpos = 0;
-    textframe = new Spritesheet("images/textframe.png", 1, 1);
+    skipped = false;
+    curtains = 0;
+    textframe = new Spritesheet("images/UI/textframe.png", 1, 1);
+    portraits = new Spritesheet("images/UI/portraits.png", 2, 1);
     room = undefined;
     update(_inputs, _flags){
         if (this.active) {
@@ -16,14 +19,20 @@ class CutsceneProcessor  {
             var _handling_done = false;
             var _i = 0;
             while (_handling_done === false) {
+                if (_current_event.skippable && _inputs.bp && this.progress < _current_event.length) {
+                    this.progress = _current_event.length;
+                    this.skipped = true;
+                }
                 _i += 1;
                 switch(_current_event.type)
                 {
                     case "Text":
+                    case "PText":
                     if (this.progress < _current_event.length) {this.progress += 1;}
                     break;
 
                     case "Wait":
+                    case "WaitChoice":
                     if (this.progress < _current_event.length) {this.progress += 1;}
                     break;
 
@@ -38,6 +47,7 @@ class CutsceneProcessor  {
 
                     case "SetGlobal":
                     this.room.globals[_current_event.flag] = _current_event.value;
+                    this.room.save_storage();
                     break;
 
                     case "Save":
@@ -70,12 +80,21 @@ class CutsceneProcessor  {
                             }
                             break;
 
+                            case "WaitChoice":
+                            if (this.skipped) {this.stage = _current_event.results[1];}
+                            else {this.stage = _current_event.results[0];}
+                            break;
+
                             case "CheckGlobal":
                             if (this.room.globals[_current_event.flag] == _current_event.comparison) {
                                 this.stage = _current_event.ifyes;
                             } else {
                                 this.stage = _current_event.ifno;
                             }
+                            break;
+
+                            case "Warp":
+                            this.room.room_goto(_current_event.url, _current_event.sx, _current_event.sy);
                             break;
 
                             default:
@@ -91,6 +110,7 @@ class CutsceneProcessor  {
                             _current_event = this.cutscene[this.stage];
                         }
                         _inputs.ap = false;
+                        this.skipped = false;
                     } else {
                         _handling_done = true;
                     }
@@ -119,6 +139,18 @@ class CutsceneProcessor  {
                 this.textframe.draw(_ctx, 8, _drawh, 0);
                 var _tl1 = _current_event.text.length;
                 PixelText.draw(_ctx, _current_event.text.slice(0, Math.min(this.progress, _tl1)), 21, _drawh + 10);
+                if (this.progress < _tl1) {break;}
+                PixelText.draw(_ctx, _current_event.text2.slice(0, Math.min(this.progress - _tl1, _current_event.length - _tl1)), 21, _drawh + 24);
+                break;
+
+                case "PText":
+                if (this.room.camera.follow.y - this.room.camera.y > 80) {
+                    _drawh = 12;
+                }
+                this.textframe.draw(_ctx, 8, _drawh, 0);
+                this.portraits.draw(_ctx, 20, _drawh + 7, _current_event.portrait);
+                var _tl1 = _current_event.text.length;
+                PixelText.draw(_ctx, _current_event.text.slice(0, Math.min(this.progress, _tl1)), 45, _drawh + 10);
                 if (this.progress < _tl1) {break;}
                 PixelText.draw(_ctx, _current_event.text2.slice(0, Math.min(this.progress - _tl1, _current_event.length - _tl1)), 21, _drawh + 24);
                 break;

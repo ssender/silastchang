@@ -8,9 +8,7 @@ room.objects.push(new ObjItemHat(80, 64, 1));
 room.objects.push(new ObjItemHat(112, 64, 3));
 room.objects.push(new ObjItemHat(144, 64, 4));
 room.objects.push(new ObjItemHat(176, 64, 2));
-room.img_bg.src = "images/header-smaller.png";
-room.img_fg.src = "images/frame.png";
-room.img_ts.src = "images/ts1.png";
+
 room.camera.follow = room.objects[0];
 
 export default room;

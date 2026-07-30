@@ -1,6 +1,6 @@
 import Spritesheet from "./sprsheet.js";
 const PixelText = {
-    sprite: new Spritesheet("images/text.png", 6, 16, 128, 72),
+    sprite: new Spritesheet("images/UI/text.png", 6, 16, 128, 72),
     encoder: new TextEncoder(),
     draw(_context, _text, _x, _y) {
         if (this.sprite.loaded) {

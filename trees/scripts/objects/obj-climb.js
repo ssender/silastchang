@@ -8,7 +8,7 @@ class ObjClimb extends ObjInteract {
     state = 1; // 0-disabled, 1-idle, 2-activated
     constructor(ix=0, iy=0, n=1) {
         super(ix, iy);
-        this.spritesheet = new Spritesheet("images/chalk.png", 1, 2);
+        this.spritesheet = new Spritesheet("images/item/chalk.png", 1, 2);
         this.aframe = n-1;
 
         this.cutscene = [

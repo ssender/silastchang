@@ -136,3 +136,19 @@ li{
   justify-content: center;
   font-size: 14px;
 }
+
+a:link {
+  color : #1a2d21;
+}
+
+a:visited {
+  color : #1a2d21;
+}
+
+a:hover {
+  color : #486b45
+}
+
+a:active {
+  color : #8ca768
+}

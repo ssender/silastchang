@@ -1,6 +1,7 @@
 // ROOM SETUP ------------------------------
 const room = document.room;
 room.initiate();
+room.load_storage();
 
 // GENERAL SETUP ------------------------------
 // inputs
@@ -14,7 +15,10 @@ const inputs = {
     upp : false,
     downp : false,
     a : false,
-    ap : false
+    ap : false,
+    b : false,
+    bp : false,
+    dp : false
 }
 function getKeyDown(event) {
     if (event.code === "ArrowLeft") {
@@ -32,6 +36,11 @@ function getKeyDown(event) {
     } else if (event.code === "KeyZ") {
         inputs.a = true;
         inputs.ap = true;
+    } else if (event.code === "KeyX") {
+        inputs.b = true;
+        inputs.bp = true;
+    } else if (event.code === "KeyC") {
+        inputs.dp = true;
     } 
     event.preventDefault();
 }
@@ -46,7 +55,9 @@ function getKeyUp(event) {
         inputs.down = false;
     } else if (event.code === "KeyZ") {
         inputs.a = false;
-    } 
+    } else if (event.code === "KeyX") {
+        inputs.b = false;
+    }
     event.preventDefault();
 }
 function resetKeys(){
@@ -55,6 +66,8 @@ function resetKeys(){
     inputs.upp = false;
     inputs.downp = false;
     inputs.ap = false;
+    inputs.bp = false;
+    inputs.dp = false;
 }
 document.addEventListener("keydown", getKeyDown);
 document.addEventListener("keyup", getKeyUp);
@@ -74,8 +87,8 @@ function step(timestamp) {
     dt += (timestamp - start)*0.001;
     if (dt >= 0.025) {
         // update the values of the world in game
-        if (inputs.ap) {
-            console.log(String(room.globals["hat"]));
+        if (inputs.dp) {
+            console.log(room);
         }
         room.update(inputs);
         
@@ -84,6 +97,7 @@ function step(timestamp) {
         // draw all the things
         room.draw(ctx);
         dt = 0;
+        
         
     }
     start = timestamp;

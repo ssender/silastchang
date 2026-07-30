@@ -16,6 +16,19 @@ class TextCE extends CutsceneElement {
         this.text = _text;
         this.text2 = _text2;
         this.length = _text.length + _text2.length;
+        this.skippable = true;
+    }
+}
+
+class PTextCE extends CutsceneElement {
+    constructor(_portrait = 0, _text="", _text2="", _skippable=false) {
+        super();
+        this.portrait = _portrait;
+        this.type = "PText";
+        this.text = _text;
+        this.text2 = _text2;
+        this.length = _text.length + _text2.length;
+        this.skippable = true;
     }
 }
 
@@ -36,6 +49,30 @@ class ChoiceCE extends CutsceneElement {
         this.results= _results;
         this.length = 0;
         this.auto = false;
+    }
+}
+
+class WaitChoiceCE extends CutsceneElement {
+    constructor(_frames, _results=[1, 1]) {
+        super();
+        this.type = "WaitChoice";
+        this.choices = _choices;
+        this.results= _results;
+        this.length = _frames;
+        this.auto = true;
+        this.skippable = true;
+    }
+}
+
+class WarpCE extends CutsceneElement {
+    constructor(_url="", _sx=0, _sy=0) {
+        super();
+        this.type = "Warp";
+        this.length = 0;
+        this.auto = true;
+        this.url = _url;
+        this.sx = _sx;
+        this.sy = _sy;
     }
 }
 
@@ -118,4 +155,4 @@ class SpriteCE extends CutsceneElement {
     }
 }
 
-export {TextCE, WaitCE, ChoiceCE, CheckFlagCE, SetFlagCE, JumpCE, SaveCE, SetGlobalCE, CheckGlobalCE, SpriteCE};
+export {TextCE, PTextCE, WaitCE, ChoiceCE, CheckFlagCE, SetFlagCE, JumpCE, SaveCE, SetGlobalCE, CheckGlobalCE, SpriteCE, WaitChoiceCE, WarpCE};

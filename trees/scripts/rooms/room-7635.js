@@ -6,11 +6,8 @@ import Spritesheet from "../base/sprsheet.js";
 import * as cutscenes from "../base/cutscenes.js";
 
 room.tilemap = [[32,32,32,32,32,32,32,32,32,32],[32,0,0,0,0,0,32,0,0,32],[32,0,0,0,0,0,32,0,32,32],[32,0,0,0,0,0,32,0,0,32],[32,0,0,0,0,0,32,0,0,32],[32,0,0,0,0,0,32,0,0,32],[32,0,0,0,32,32,0,0,0,32],[32,0,0,32,32,0,0,0,0,32],[32,0,0,32,32,0,0,0,0,32],[32,0,0,32,32,0,0,0,0,32],[32,0,0,0,32,32,0,0,0,32],[32,0,0,0,0,0,32,0,0,32],[32,0,0,0,0,0,32,0,0,32],[32,0,0,0,0,0,32,0,0,32],[32,0,0,0,0,0,32,0,32,32],[32,0,0,0,0,0,32,0,32,32],[32,32,32,32,32,32,32,32,32,32]];
-room.objects.push(new ObjStaticSprite(8, 8, new Spritesheet("images/broadway.png", 1, 1), 0));
+room.objects.push(new ObjStaticSprite(8, 8, new Spritesheet("images/bg/broadway.png", 1, 1), 0));
 room.objects.push(new ObjCharacter(128, 96));
-room.img_bg.src = "images/header-smaller.png";
-room.img_fg.src = "images/frame.png";
-room.img_ts.src = "images/ts1.png";
 room.camera.follow = room.objects[1];
 
 // room flags
@@ -64,7 +61,7 @@ room.objects[6].cutscene = [
 ];
 
 // waffle shop pickup window
-const waffleimage = new Spritesheet("images/waffle.png", 1, 1);
+const waffleimage = new Spritesheet("images/item/waffle.png", 1, 1);
 room.objects.push(new ObjInteract(224, 96))
 room.objects[7].cutscene = [
     new cutscenes.CheckFlagCE(0, true, 1, 6),
