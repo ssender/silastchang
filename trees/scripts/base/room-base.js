@@ -4,6 +4,7 @@ import CutsceneProcessor from "./cutscene-processor.js";
 const room = {
     loaded : false,
     context : undefined,
+    acontext : new AudioContext(),
     camera : {x:0, y:0, follow:undefined},
     cutscene_handler : new CutsceneProcessor(),
     globals : {
@@ -16,6 +17,7 @@ const room = {
     img_bg : new Image(),
     img_fg : new Image(),
     objects : [],
+    audio : {"confirm" : new Audio("audio/sfx/confirm.wav")},
     img_ts : new Spritesheet("images/tilesets/ts1.png", 8, 8),
     room_width : 1,
     room_height : 1,
@@ -65,6 +67,11 @@ const room = {
             localStorage.setItem("sx", -1);
             localStorage.setItem("sy", -1);
         }
+        for (const _k in this.audio) {
+            var _track = this.acontext.createMediaElementSource(this.audio[_k]);
+            _track.connect(this.acontext.destination);
+        }
+
     },
     objects_at_tile(tx, ty) {
         var out = [];
@@ -129,6 +136,14 @@ const room = {
         localStorage.setItem("sy", _sy);
         localStorage.setItem("sf", this.camera.follow.facing);
         window.location.assign(_url);
+    },
+    play_sound(_sound="") {
+        var _audioelement = this.audio[_sound];
+        if (_audioelement != undefined) {
+            if (_audioelement.readyState == HTMLMediaElement.HAVE_ENOUGH_DATA) {
+                _audioelement.play();
+            }
+        }
     }
 };
 

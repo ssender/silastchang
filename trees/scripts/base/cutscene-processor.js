@@ -97,6 +97,12 @@ class CutsceneProcessor  {
                             this.room.room_goto(_current_event.url, _current_event.sx, _current_event.sy);
                             break;
 
+                            case "Text":
+                            case "PText":
+                            this.stage += 1;
+                            this.room.play_sound("confirm");
+                            break;
+
                             default:
                             this.stage += 1;
                             break;
