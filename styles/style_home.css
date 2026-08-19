@@ -99,6 +99,7 @@ td {
   padding-top: 50%;
   padding-bottom: 5px;
   margin-bottom: 10px;
+  display:flex;
 }
 
 .title{
