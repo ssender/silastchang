@@ -35,7 +35,7 @@ class ObjCharStatic extends ObjInteract {
     }
 
     draw(_context, _cam) {
-        this.spritesheet.draw(_context, this.x - _cam.x, this.y - _cam.y  - 2, this.aframe);
+        this.spritesheet.draw(_context, this.x - _cam.x, this.y - _cam.y  - 3, this.aframe);
     }
 }
 

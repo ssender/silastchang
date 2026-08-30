@@ -8,8 +8,9 @@ class CutsceneProcessor  {
     cutscene = 0;
     anim_clock = 0;
     cursorpos = 0;
+    time_accumulator = 0;
     skipped = false;
-    curtains = 0;
+    curtains = 0.0;
     textframe = new Spritesheet("images/UI/textframe.png", 1, 1);
     portraits = new Spritesheet("images/UI/portraits.png", 2, 1);
     room = undefined;
@@ -28,12 +29,31 @@ class CutsceneProcessor  {
                 {
                     case "Text":
                     case "PText":
-                    if (this.progress < _current_event.length) {this.progress += 1;}
+                    if (this.progress < _current_event.length) {
+                        this.progress += 1;
+                    }
                     break;
 
                     case "Wait":
                     case "WaitChoice":
                     if (this.progress < _current_event.length) {this.progress += 1;}
+                    break;
+
+                    case "WaitSeconds":
+                    this.time_accumulator += this.room.dt;
+                    if (this.time_accumulator >= _current_event.lengthtime) {
+                        this.progress = 100;
+                        this.time_accumulator = 0;
+                    }
+                    break;
+
+                    case "Curtain":
+                    this.progress += 1;
+                    if (_current_event.close) {
+                        this.curtains = ((this.progress+1) / _current_event.length);
+                    } else {
+                        this.curtains = 1 - (this.progress / _current_event.length);
+                    }
                     break;
 
                     case "Choice":
@@ -52,6 +72,13 @@ class CutsceneProcessor  {
 
                     case "Save":
                     this.room.save_storage();
+                    break;
+
+                    case "Audio":
+                    if (this.progress == 0){
+                        this.room.play_sound(_current_event.audiokey)
+                    }
+                    this.progress += 1;
                     break;
 
                     default:
@@ -136,6 +163,14 @@ class CutsceneProcessor  {
         if (this.active) {
             var _current_event = this.cutscene[this.stage];
             var _drawh = 88;
+            // draw curtains
+            if (this.curtains > 0) {
+                var _x = this.curtains * 128;
+                _ctx.fillStyle = `rgb(26, 45, 33)`;
+                _ctx.fillRect(0, 0, _x, 144);
+                _ctx.fillRect(256 - _x, 0, _x, 144);
+            }
+            // other features
             switch(_current_event.type)
             {
                 case "Text":

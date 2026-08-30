@@ -7,6 +7,7 @@ import Spritesheet from "../base/sprsheet.js";
 import * as cs from "../base/cutscenes.js";
 
 room.tilemap = [[32,32,32,32,32,32,32,32,32,32],[32,0,0,0,0,0,0,0,0,32],[32,0,0,0,0,0,0,0,0,32],[32,32,32,32,32,32,32,32,32,32],[32,0,32,32,0,0,0,32,32,32],[32,0,32,32,0,0,0,0,32,32],[32,0,32,0,0,0,0,0,0,0],[32,0,32,32,0,0,0,0,32,32],[32,0,32,32,32,0,0,32,32,32],[32,0,32,32,0,0,0,32,0,32],[32,0,32,0,0,0,0,32,0,32],[32,0,32,32,32,0,0,32,0,32],[32,0,32,32,0,0,32,32,0,32],[32,32,32,32,32,32,32,32,0,32],[32,0,0,0,0,0,0,0,0,32],[32,0,0,0,0,0,0,0,0,32],[32,32,32,32,32,32,32,32,32,32]];
+room.audio["musicbox"] = new Audio("audio/mus/musicbox.ogg")
 room.objects.push(new ObjStaticSprite(8, 8, new Spritesheet("images/bg/home-bg.png", 1, 1), 0));
 room.objects.push(new ObjCharacter(96, 112));
 room.objects.push(new ObjItemRunShoes(80, 112));
@@ -20,7 +21,18 @@ room.objects[3].cutscene = _wardrobe;
 room.objects[4].cutscene = _wardrobe;
 
 const _bed = [
-    new cs.TextCE("Your bed.")
+    new cs.TextCE("Your bed."),
+    new cs.TextCE("Go to sleep?"),
+    new cs.ChoiceCE(["yes", "no"], [3, 100]),
+    new cs.CurtainCE(true),
+    new cs.WaitCE(15),
+    new cs.TextCE("You went to sleep."), //5
+    new cs.WaitCE(30),
+    new cs.CheckGlobalCE("slept", 1, 10, 8),
+    new cs.AudioCE("musicbox"),
+    new cs.WaitSecondsCE(31.7),
+    new cs.SetGlobalCE("slept", 1), //10
+    new cs.WarpCE("dream-forest.html", 11, 15)
 ]
 room.objects.push(new ObjInteract(11*16, 48), new ObjInteract(11*16, 64));
 room.objects[5].cutscene = _bed;

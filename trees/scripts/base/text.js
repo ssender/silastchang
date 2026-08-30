@@ -1,3 +1,5 @@
+// creates a PixelText object, whose one method draw() draws the specified text.
+
 import Spritesheet from "./sprsheet.js";
 const PixelText = {
     sprite: new Spritesheet("images/UI/text.png", 6, 16, 128, 72),

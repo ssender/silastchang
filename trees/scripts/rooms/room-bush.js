@@ -28,7 +28,7 @@ room.objects[2].cutscene = [
     new cs.CheckGlobalCE("wantskey", 1, 4, 17),
     new cs.PTextCE(0, "What? You want your key", "back?"), 
     new cs.PTextCE(0, "I was going to eat it."),//5
-    new cs.PTextCE(0, "Maybe if you could find", "something that tastes..."),
+    new cs.PTextCE(0, "Maybe if you could find", "a pretzel that tastes..."),
     new cs.PTextCE(0, "...better than key, I", "could give it to you."),
     new cs.CheckGlobalCE("haspretzel", 1, 9, 100), 
     new cs.TextCE("(You gave the pretzel to", "TALKING FROG.)"),

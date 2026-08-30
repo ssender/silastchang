@@ -10,7 +10,8 @@ class ObjStaticSprite extends Obj {
 
     draw(_context, _cam) {
         // draw the sprite
-        this.spritesheet.draw(_context, this.x - _cam.x, this.y - _cam.y, this.frame);
+        const _dcs = _cam.get_draw_coords(this);
+        this.spritesheet.draw(_context, _dcs.x, _dcs.y, this.frame);
     }
 }
 

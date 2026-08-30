@@ -88,8 +88,10 @@ function step(timestamp) {
     if (dt >= 0.025) {
         // update the values of the world in game
         if (inputs.dp) {
+            console.log(room.camera.follow);
             console.log(room);
         }
+        room.dt = dt;
         room.update(inputs);
         
         //if (inputs.ap) {console.log(room.room_width, room.room_height, room.camera.x, room.camera.y)}
@@ -97,8 +99,6 @@ function step(timestamp) {
         // draw all the things
         room.draw(ctx);
         dt = 0;
-        
-        
     }
     start = timestamp;
     requestAnimationFrame(step);

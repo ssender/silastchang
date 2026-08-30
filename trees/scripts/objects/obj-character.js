@@ -48,28 +48,30 @@ class ObjCharacter extends Obj {
                 return;
             }
             // initial check of tiles
+            
             if (_inputs.right) {
                 this.facing = 2;
-                if (_tilemap[this.tilex + 1][this.tiley] < 32) {
-                    _targettilex += 1;
-                }
+                _targettilex += 1;
             }else if (_inputs.left) {
                 this.facing = 4;
-                if (_tilemap[this.tilex - 1][this.tiley] < 32) {
-                    _targettilex += -1;
-                }else{
-                    //console.log("movement blocked by tile", _tilemap[this.tilex - 1][this.tiley]);
-                }
+                _targettilex += -1;
             }else if (_inputs.up) {
                 this.facing = 1;
-                if (_tilemap[this.tilex][this.tiley - 1] < 32) {
-                    _targettiley += -1;
-                }
+                _targettiley += -1;
             }else if (_inputs.down) {
                 this.facing = 3;
-                if (_tilemap[this.tilex][this.tiley + 1] < 32) {
-                    _targettiley += 1;
-                }
+                _targettiley += 1;
+            }
+            if (_room.looping) {
+                if (_targettilex >= _room.tilemap_width) {_targettilex += -_room.tilemap_width}
+                if (_targettilex < 0) {_targettilex += _room.tilemap_width}
+                if (_targettiley >= _room.tilemap_height) {_targettiley += -_room.tilemap_height}
+                if (_targettiley < 0) {_targettiley += _room.tilemap_height}
+            }
+            if (_tilemap[_targettilex][_targettiley] >= 32) {
+                _targettilex = this.tilex;
+                _targettiley = this.tiley;
+                console.log("movement blocked by tile")
             }
             if (_targettilex != this.tilex || _targettiley != this.tiley) {
                 // check for collidible objects
@@ -109,6 +111,39 @@ class ObjCharacter extends Obj {
             this.moveprogress += _ds;
             if (this.moveprogress > 16) {
                 this.moveprogress = 0;
+                if (_room.looping) {
+                this.x = (this.x + _room.room_width)%_room.room_width;
+                this.y = (this.y + _room.room_height)%_room.room_height;
+                }
+                //checks the outside edge room transitions
+                if (this.tilex == 0) {
+                    for (const _w of _room.warps.west) {
+                        if (this.tiley >= _w.lower && this.tiley <= _w.upper) {
+                            _room.room_goto(_w.url, _w.sx, _w.sy);
+                        }
+                    }
+                }
+                if (this.tilex == _room.tilemap_width - 1) {
+                    for (const _w of _room.warps.east) {
+                        if (this.tiley >= _w.lower && this.tiley <= _w.upper) {
+                            _room.room_goto(_w.url, _w.sx, _w.sy);
+                        }
+                    }
+                }
+                if (this.tiley == 0) {
+                    for (const _w of _room.warps.north) {
+                        if (this.tilex >= _w.lower && this.tilex <= _w.upper) {
+                            _room.room_goto(_w.url, _w.sx, _w.sy);
+                        }
+                    }
+                }
+                if (this.tiley == _room.tilemap_height - 1) {
+                    for (const _w of _room.warps.south) {
+                        if (this.tilex >= _w.lower && this.tilex <= _w.upper) {
+                            _room.room_goto(_w.url, _w.sx, _w.sy);
+                        }
+                    }
+                }
             }
             this.aclock += _ds;
             if (this.aclock >= 8) {
@@ -119,44 +154,18 @@ class ObjCharacter extends Obj {
         } else {
             this.aframe = 0;
             this.aclock = 0;
-            if (this.tilex == 0) {
-                for (const _w of _room.warps.west) {
-                    if (this.tiley >= _w.lower && this.tiley <= _w.upper) {
-                        _room.room_goto(_w.url, _w.sx, _w.sy);
-                    }
-                }
-            }
-            if (this.tilex == _room.tilemap_width - 1) {
-                for (const _w of _room.warps.east) {
-                    if (this.tiley >= _w.lower && this.tiley <= _w.upper) {
-                        _room.room_goto(_w.url, _w.sx, _w.sy);
-                    }
-                }
-            }
-            if (this.tiley == 0) {
-                for (const _w of _room.warps.north) {
-                    if (this.tilex >= _w.lower && this.tilex <= _w.upper) {
-                        _room.room_goto(_w.url, _w.sx, _w.sy);
-                    }
-                }
-            }
-            if (this.tiley == _room.tilemap_height - 1) {
-                for (const _w of _room.warps.south) {
-                    if (this.tilex >= _w.lower && this.tilex <= _w.upper) {
-                        _room.room_goto(_w.url, _w.sx, _w.sy);
-                    }
-                }
-            }
+            
         }
         this.frame = (this.facing - 1)*5 + this.aframe;
         super.update(_inputs, _room);
     }
 
     draw(_context, _cam) {
-        this.spritesheet.draw(_context, this.x - _cam.x, this.y - 3 - _cam.y, (this.facing - 1)*5 + this.aframe);
+        var _dcs = _cam.get_draw_coords(this);
+        this.spritesheet.draw(_context, _dcs.x, _dcs.y-3, (this.facing - 1)*5 + this.aframe);
         if (this.hat > 0) {
             var _f = (this.hat * 4) - 5 + this.facing;
-            this.hatssheet.draw(_context, this.x - _cam.x, this.y - 11 - _cam.y + (this.aframe % 2), _f);
+            this.hatssheet.draw(_context, _dcs.x, _dcs.y - 11 + this.aframe%2 , _f);
         }
     }
 }
