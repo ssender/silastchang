@@ -13,6 +13,7 @@ class ObjCharacter extends Obj {
         this.spritesheet = new Spritesheet("images/char/mc_spritesheet.png", 4, 5);
         this.hatssheet = new Spritesheet("images/char/hats_sheet.png", 4, 4);
         this.id = "Character";
+        this.foot = 16;
     }
 
     update(_inputs, _room) {
@@ -71,7 +72,7 @@ class ObjCharacter extends Obj {
             if (_tilemap[_targettilex][_targettiley] >= 32) {
                 _targettilex = this.tilex;
                 _targettiley = this.tiley;
-                console.log("movement blocked by tile")
+                //console.log("movement blocked by tile")
             }
             if (_targettilex != this.tilex || _targettiley != this.tiley) {
                 // check for collidible objects

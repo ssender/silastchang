@@ -189,13 +189,25 @@ class CurtainCE extends CutsceneElement {
 }
 
 class AudioCE extends CutsceneElement {
-    constructor(_audiokey, _wait=0) {
+    constructor(_audiokey, _wait=0, _play=true, _reset=false) {
         super();
         this.type = "Audio"
         this.length = _wait;
         this.auto = true;
         this.audiokey = _audiokey;
+        this.play = _play;
+        this.reset = _reset;
     }
 }
 
-export {TextCE, PTextCE, WaitCE, ChoiceCE, CheckFlagCE, SetFlagCE, JumpCE, SaveCE, SetGlobalCE, CheckGlobalCE, SpriteCE, WaitChoiceCE, WarpCE, CurtainCE, AudioCE, WaitSecondsCE};
+class AnimCE extends CutsceneElement {
+    constructor(_obj_id, _anim_id) {
+        super();
+        this.type = "Anim";
+        this.auto = true;
+        this.target_id = _obj_id;
+        this.anim_id = _anim_id;
+    }
+}
+
+export {TextCE, PTextCE, WaitCE, ChoiceCE, CheckFlagCE, SetFlagCE, JumpCE, SaveCE, SetGlobalCE, CheckGlobalCE, SpriteCE, WaitChoiceCE, WarpCE, CurtainCE, AudioCE, WaitSecondsCE, AnimCE};

@@ -8,18 +8,34 @@ const room = {
     dt : 0,
     acontext : new AudioContext(),
     objects : [],
+    do_y_depth : true,
     audio : {
         "bgm" : undefined,
-        "confirm" : new Audio("audio/sfx/confirm.wav")
+        "confirm" : new Audio("audio/sfx/confirm.wav"),
+        "blip" : new Audio("audio/sfx/blip.wav")
     },
-    camera : {x:0, y:0, follow:undefined, looping : false, room_width : 0, room_height : 0,
+    camera : {x:0, y:0, follow:undefined, looping : false, room_width : 0, room_height : 0, xo:0, yo:0,
         get_draw_coords : function(_obj) {
-            var _out = {x : _obj.x - this.x, y : _obj.y - this.y};
+            var _out = {x : this.xo +_obj.x - this.x, y : this.yo + _obj.y - this.y};
             if (this.looping) {
-                _out.x = (_out.x + this.room_width)%this.room_width;
-                _out.y = (_out.y + this.room_height)%this.room_height;
+                _out.x = this.xo + (_out.x + this.room_width + 8)%this.room_width - 8;
+                _out.y = this.yo + (_out.y + this.room_height)%this.room_height;
             }
             return _out;
+        },
+        update : function(_room) {
+            if (this.follow != undefined) {
+                if (this.looping) {
+                    this.x = this.follow.x - 120;
+                    this.y = this.follow.y - 72;
+                    if (this.x < 0) {this.x += _room.room_width;}
+                    if (this.y < 0) {this.y += _room.room_height;}
+                } else {
+                    this.x = Math.max(8, Math.min(_room.room_width - 264, this.follow.x - 120));
+                    this.y = Math.max(8, Math.min(_room.room_height - 152, this.follow.y - 72));
+                }
+                
+            }
         }
     },
     cutscene_handler : new CutsceneProcessor(),
@@ -28,7 +44,9 @@ const room = {
         "housekey" : 0, "wantskey" : 0, "haspretzel" : 0,
         "runshoes" : 0,
         "slept" : 0,
-        "sx" : -1, "sy" : -1, "sf" : 3
+        "sx" : -1, "sy" : -1, "sf" : 3,
+        "hasmetal" : 0, "hasfabric" : 0, "hasribbon" : 0, "angelquest" : 0,
+        "unlockedshrinegate" : 0
     },
     flags : new Array(64),
     img_bg : new Image(),
@@ -53,7 +71,7 @@ const room = {
                 this.globals[_field] = localStorage.getItem(_field);
             }
         }
-        this.camera.follow.hat = this.globals.hat;
+        
     },
     save_storage() {
         for (const _field in this.globals) {
@@ -75,6 +93,7 @@ const room = {
         this.cutscene_handler.room = this;
         this.camera.looping = this.looping;
         this.load_storage();
+        this.camera.follow.hat = this.globals.hat;
         var _sx = localStorage.getItem("sx");
         var _sy = localStorage.getItem("sy");
         var _sf = localStorage.getItem("sf");
@@ -91,6 +110,9 @@ const room = {
             if (this.audio[_k] == undefined) {continue;}
             var _track = this.acontext.createMediaElementSource(this.audio[_k]);
             _track.connect(this.acontext.destination);
+        }
+        if (this.audio.bgm != undefined) {
+            this.audio.bgm.loop = true;
         }
         if (this.open_curtains) {
             this.cutscene_handler.cutscene = [
@@ -139,22 +161,15 @@ const room = {
                     this.play_sound("bgm");
                 }
             }
+
+            
         }
         this.cutscene_handler.update(_inputs, this.flags);
         this.objects.forEach((obj) => obj.update(_inputs, this));
-
-        if (this.camera.follow != undefined) {
-            if (this.looping) {
-                this.camera.x = this.camera.follow.x - 120;
-                this.camera.y = this.camera.follow.y - 72;
-                if (this.camera.x < 0) {this.camera.x += this.room_width;}
-                if (this.camera.y < 0) {this.camera.y += this.room_height;}
-            } else {
-                this.camera.x = Math.max(8, Math.min(this.room_width - 264, this.camera.follow.x - 120));
-                this.camera.y = Math.max(8, Math.min(this.room_height - 152, this.camera.follow.y - 72));
-            }
-            
+        if (this.do_y_depth) {
+            this.objects.sort((a,b) => (a.y  + a.foot - b.y - b.foot))
         }
+        this.camera.update(this);
     },
     draw(_ctx){
         // background
@@ -221,11 +236,25 @@ const room = {
         localStorage.setItem("sf", this.camera.follow.facing);
         window.location.assign(_url);
     },
-    play_sound(_sound="") {
+    play_sound(_sound="", _reset=true) {
         var _audioelement = this.audio[_sound];
         if (_audioelement != undefined) {
             if (_audioelement.readyState == HTMLMediaElement.HAVE_ENOUGH_DATA) {
+                if (_audioelement.currentTime > 0) {
+                    if (_reset) {
+                        _audioelement.currentTime = 0;
+                    } else {
+                    }
+                }
                 _audioelement.play();
+            }
+        }
+    },
+    pause_sound(_sound="") {
+        var _audioelement = this.audio[_sound];
+        if (_audioelement != undefined) {
+            if (_audioelement.readyState == HTMLMediaElement.HAVE_ENOUGH_DATA) {
+                _audioelement.pause();
             }
         }
     }
@@ -233,6 +262,6 @@ const room = {
 
 room.img_bg.src = "images/UI/header-smaller.png";
 room.img_fg.src = "images/UI/frame.png";
-room.img_ts.src = "images/tilesets/ts1.png"
+
 
 export default room;

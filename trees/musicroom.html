@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="./styles/style-dark.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script type="module">
+      import room from "./scripts/rooms/room-music.js"
+      document.room = room;
+    </script>
+    <script  src="scripts/main.js" type="module"></script>
+    <title>Forest</title>
+  </head>
+  <body>
+    <h1>
+        <a href="forest.html" class="no-underline">
+      <img src="images/tree-bright.png" height="64px" width="32px" display="inline">
+      Forest
+      </a>
+    </h1>
+  
+    <canvas width="256px" height="144px">
+      a window into a world
+    </canvas>
+
+    <div class="title-container">
+      <h1>Music Room</h1>
+    </div>
+
+    <div class="song">
+      <h2>0. Music Box</h2>
+      <audio controls src="audio/mus/musicbox.ogg"></audio>
+    </div>
+
+    <p>I needed a small music box lullaby for the initial going-to-bed-to-dream sequence, so I adapted part of a song I already composed. This won't be the last time you hear this melody...</p>
+
+    <div class="song">
+      <h2>1. Dream Intro</h2>
+      <audio controls src="audio/mus/dream-start.ogg"></audio>
+    </div>
+    
+
+    <p>This is a very ambient track (the notes start at about 13 seconds in, and are very sparse). In my opinion, it's not very interesting. This melody was composed a long time ago and has sat in my brain ever since. The very open, emotionally ambigous minor 9 chord to start is nice as an introduction to the surreal dream world. A version without the melody can be heard in the main dream hub room.</p>
+
+    <p>Fun fact: the music notes in this song are played on a sample instrument, where the samples are pulled from minecraft's note block sounds.</p>
+
+    <div class="song">
+      <h2>2. Starlit Forest</h2>
+      <audio controls src="audio/mus/peace.ogg"></audio>
+    </div>
+
+    <p>This song is made up of a set of 8-bar loops, that turn on and off. I composed the ostinato that underlies the whole song late at night. The only non-virtual instrument is the bass, which I recorded myself playing. It's not perfect, but I think the imperfections contrast nicely with the perfectly looped and quantized other tracks. The sound design is vaguely inspired by the ambient tracks of OMORI, though I wasn't inspired by any track in particular. The heavy delay really helps the music feel bigger, and gives the space you run around in-game a sense of scale. I hope hearing this track repeat during the grid puzzle wasn't too annoying.</p>
+
+    <div class="song">
+      <h2>3. Shrine of the Glowing Bat Imps</h2>
+      <audio controls src="audio/mus/batshrine.ogg"></audio>
+    </div>
+
+    <p>The glowing bat imps are simple and silly creatures, and so a simple and silly song was needed. The lone sine wave carrying the melody is somewhat inspired by the work of the well-known silly music producer Tsundere Twintails. The A-section sounds a bit like an elementary school piano exercise, but I thought it was okay in this instance. The B-section highlights the sort of janky piano soundfont, which comes from Super Mario 64. </p>
+
+    <a href="forest.html"><img src="images/article/treedivider-light.png" class="divider-img"></a>
+  </body>
+</html>

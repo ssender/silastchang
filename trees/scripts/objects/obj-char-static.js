@@ -1,6 +1,5 @@
 import ObjInteract from "../base/obj-interact-base.js";
-import Spritesheet from "../base/sprsheet.js";
-import * as cs from "../base/cutscenes.js";
+
 
 class ObjCharStatic extends ObjInteract {
     aframe = 0;
@@ -35,7 +34,8 @@ class ObjCharStatic extends ObjInteract {
     }
 
     draw(_context, _cam) {
-        this.spritesheet.draw(_context, this.x - _cam.x, this.y - _cam.y  - 3, this.aframe);
+        var c = _cam.get_draw_coords(this);
+        this.spritesheet.draw(_context, c.x, c.y - 3, this.aframe);
     }
 }
 

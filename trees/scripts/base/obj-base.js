@@ -2,6 +2,9 @@
 class Obj {
     x = 0;
     y = 0;
+    xo = 0;
+    yo = 0;
+    foot = 0;
     spritesheet = undefined;
     frame = 0;
     id = "Obj";

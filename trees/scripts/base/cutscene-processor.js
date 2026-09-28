@@ -12,7 +12,7 @@ class CutsceneProcessor  {
     skipped = false;
     curtains = 0.0;
     textframe = new Spritesheet("images/UI/textframe.png", 1, 1);
-    portraits = new Spritesheet("images/UI/portraits.png", 2, 1);
+    portraits = new Spritesheet("images/UI/portraits.png", 3, 1);
     room = undefined;
     update(_inputs, _flags){
         if (this.active) {
@@ -31,6 +31,11 @@ class CutsceneProcessor  {
                     case "PText":
                     if (this.progress < _current_event.length) {
                         this.progress += 1;
+                        var _txt = _current_event.text + _current_event.text2;
+                        if (_txt[this.progress] != " ") {
+                            this.room.play_sound("blip")
+                        }
+                        
                     }
                     break;
 
@@ -76,9 +81,28 @@ class CutsceneProcessor  {
 
                     case "Audio":
                     if (this.progress == 0){
-                        this.room.play_sound(_current_event.audiokey)
+                        if (_current_event.play) {
+                            if (_current_event.reset) {
+                                this.room.audio[_current_event.audiokey].currentTime = 0;
+                            }
+                            this.room.play_sound(_current_event.audiokey, _current_event.reset)
+                        } else {
+                            this.room.pause_sound(_current_event.audiokey)
+                            if (_current_event.reset) {
+                                this.room.audio[_current_event.audiokey].currentTime = 0;
+                            }
+                        }
                     }
                     this.progress += 1;
+                    break;
+
+                    case "Anim":
+                    for (const _obj of this.room.objects) {
+                        if (_obj.id == _current_event.target_id) {
+                            _obj.aclock = 0;
+                            _obj.animation = _current_event.anim_id;
+                        }
+                    }
                     break;
 
                     default:
@@ -138,6 +162,7 @@ class CutsceneProcessor  {
                             this.active = 0;
                             this.stage = 0;
                             this.cursorpos = 0;
+                            this.room.play_sound("bgm", false);
                             _handling_done = true;
                         } else {
                             _current_event = this.cutscene[this.stage];

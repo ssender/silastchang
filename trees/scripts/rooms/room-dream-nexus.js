@@ -13,6 +13,7 @@ room.tilemap = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 room.objects.push(new ObjCharacter(25*16, 24*16));
 room.camera.follow = room.objects[0];
 room.objects.push(new ObjInteract(25*16, 10*16));
+
 room.objects.push(new ObjInteract(25*16, 40*16));
 room.objects.push(new ObjInteract(10*16, 25*16));
 room.objects.push(new ObjInteract(40*16, 25*16));
@@ -27,6 +28,15 @@ var _emptyped = [
 for (var  _i = 1; _i < 9; _i++) {
     room.objects[_i].cutscene = _emptyped;
 }
+room.objects[1].cutscene = [
+    new cs.TextCE("There is a needle on the","pedestal."),
+    new cs.TextCE("Touch it?"),
+    new cs.ChoiceCE(["yes", "no"], [3, 100]),
+    new cs.WarpCE("dream-peaceful.html", 54, 43)
+]
+room.objects[1].spritesheet = new Spritesheet("./images/item/needle.png", 1,1);
+room.objects[1].floaty = true;
+room.objects[1].yo = -12;
 
 room.objects.push(new ObjInteract(28*16, 12*16));
 room.objects[9].spritesheet = new Spritesheet("./images/item/feathers.png", 1, 1);
@@ -34,6 +44,7 @@ room.objects[9].cutscene = [
     new cs.TextCE("(There are white feathers ", "on the floor.)")
 ];
 room.audio.bgm = new Audio("audio/mus/dream-start-just-wind.ogg")
+
 
 room.objects.reverse();
 export default room;

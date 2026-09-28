@@ -1,6 +1,4 @@
 import Obj from "./obj-base.js";
-import Spritesheet from "./sprsheet.js";
-import * as cutscenes from "./cutscenes.js";
 
 class ObjInteract extends Obj {
     aframe = 0;
@@ -12,10 +10,19 @@ class ObjInteract extends Obj {
         this.has_collision = true;
         this.has_interaction = true;
         this.cutscene = [];
+        this.yo = -2;
+        this.foot = 16;
+        this.floaty = false;
     }
 
     update(_inputs, _room) {
-
+        if (this.floaty) {
+            this.aclock += 1;
+            if (this.aclock > 20) {
+                this.aframe = 1- this.aframe;
+                this.aclock = 0;
+            }
+        }
     }
 
     activate(_room){
@@ -28,7 +35,7 @@ class ObjInteract extends Obj {
     draw(_context, _cam) {
         if (this.state != 0) {
             if (this.spritesheet == undefined) {return;}
-            this.spritesheet.draw(_context, this.x - _cam.x, this.y - _cam.y - 2, 0);
+            this.spritesheet.draw(_context, this.x - _cam.x, this.y - _cam.y + this.yo + this.aframe, this.aframe % this.spritesheet.nrows);
         }
         
     }

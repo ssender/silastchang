@@ -51,6 +51,12 @@ h4 {
   font-weight: normal;
 }
 
+td {
+  border: 1px solid #8ca768;
+  margin: 0px;
+}
+
+
 .small {
   font-size: 12px;
 }
@@ -114,6 +120,13 @@ li{
   justify-content: center;
 }
 
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
 .figure {
   display: flex;
   margin: 10px 10px 20px 10px;
@@ -128,6 +141,13 @@ li{
   
 }
 
+.intable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px
+}
+
 .caption {
   display: flex;
   margin: 0px 10px 30px 10px;
@@ -135,6 +155,10 @@ li{
   align-items: center;
   justify-content: center;
   font-size: 14px;
+}
+
+.song{
+  margin: 0px 20px 10px 20px;
 }
 
 a:link {

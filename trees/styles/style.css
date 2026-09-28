@@ -123,6 +123,14 @@ li{
   image-rendering: auto;
 }
 
+.center {
+  display: flex;
+  margin: 20px 10px 20px 10px;
+  align-items: center;
+  justify-content: center;
+  image-rendering: auto;
+}
+
 .figure img {
   width: 300px;
   
@@ -135,6 +143,11 @@ li{
   align-items: center;
   justify-content: center;
   font-size: 14px;
+}
+
+.citation {
+  font-size: 12px;
+  vertical-align: text-top;
 }
 
 a:link {
